@@ -7,8 +7,20 @@
 #   Uncomment the ones you want to try and experiment with.
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
+request = require('request')
 
 module.exports = (robot) ->
+
+  asumiss = ["あすみす！", "アスミス！", "あすみっつ！"]
+  robot.hear /いぇ(|っ)す/i, (msg) ->
+    msg.reply msg.random asumiss
+
+  robot.respond /image/i, (msg) ->
+    img_api = "http://ajax.googleapis.com/ajax/services/search/images?q=#{encodeURIComponent('阿澄佳奈')}&v=1.0&rsz=8"
+    request.get img_api, (err, res, body) ->
+      random = Math.floor(Math.random() * 8)
+      img_url = JSON.parse(body).responseData.results[random].unescapedUrl
+      msg.send img_url
 
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
