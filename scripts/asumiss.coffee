@@ -22,6 +22,24 @@ module.exports = (robot) ->
       img_url = JSON.parse(body).responseData.results[random].unescapedUrl
       msg.send img_url
 
+  robot.respond /youtube/i, (msg) ->
+    asumibot_api = "http://asumi.ch/youtubes.json"
+    request.get asumibot_api, (err, res, body) ->
+      youtube_url = JSON.parse(body).url
+      msg.send youtube_url
+
+  robot.respond /niconico/i, (msg) ->
+    asumibot_api = "http://asumi.ch/niconicos.json"
+    request.get asumibot_api, (err, res, body) ->
+      niconico_url = JSON.parse(body).url
+      msg.send niconico_url
+
+  robot.respond /movie/i, (msg) ->
+    asumibot_api = "http://asumi.ch/movies.json"
+    request.get asumibot_api, (err, res, body) ->
+      movie_url = JSON.parse(body).url
+      msg.send movie_url
+
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
