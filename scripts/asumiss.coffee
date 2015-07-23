@@ -8,6 +8,9 @@
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 request = require('request')
+npid = require('npid')
+pid = npid.create('asumiss.pid')
+pid.removeOnExit();
 
 module.exports = (robot) ->
 
