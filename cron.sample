@@ -1,1 +1,1 @@
-*/1 * * * * /bin/bash -l -c 'cd /srv/www/asumiss && if [ ! -e tmp/pids/asumiss.pid ] || ! ps $(cat tmp/pids/asumiss.pid) ; then bin/hubot -a slack >> log/asumiss.log 2>> log/asumiss.err.log & ; fi '
+*/1 * * * * /bin/bash -l -c 'cd /srv/www/asumiss && if [ ! -e tmp/pids/asumiss.pid ] || ! ps $(cat tmp/pids/asumiss.pid) ; then bin/hubot -a slack ; fi  >> log/asumiss.log 2>> log/asumiss.err.log'
