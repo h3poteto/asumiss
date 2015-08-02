@@ -18,7 +18,8 @@
     "hubot-scripts": "~2.16.1",
     "hubot-slack": "~3.3.0",
     "hubot": "~2.13.2",
-    "npid": "~0.4.0"
+    "npid": "~0.4.0",
+    "request": "~2.60.0"
   },
   "engines": {
     "node": "0.10.x"
