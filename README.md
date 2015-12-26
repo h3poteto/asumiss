@@ -13,6 +13,15 @@ has, etc!
 [generator-hubot]: https://github.com/github/generator-hubot
 
 ### Running asumiss Locally
+#### Environments
+You have to set environments for slack and google apis.
+```
+export HUBOT_SLACK_TOKEN=xoxb-xxxx
+export GOOGLE_API_KEY=hogehoge
+export GOOGLE_CUSTOM_SEARCH=fugafuga
+```
+
+#### Run
 
 You can test your hubot by running the following, however some plugins will not
 behave as expected unless the [environment variables](#configuration) they rely
