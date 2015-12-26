@@ -9,8 +9,11 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 request = require('request')
 npid = require('npid')
-pid = npid.create('tmp/pids/asumiss.pid')
-pid.removeOnExit();
+filepath = 'tmp/pids/asumiss.pid'
+npid.remove(filepath)
+pid = npid.create(filepath)
+pid.removeOnExit()
+
 
 module.exports = (robot) ->
 
@@ -19,10 +22,12 @@ module.exports = (robot) ->
     msg.reply msg.random asumiss
 
   robot.respond /image/i, (msg) ->
-    img_api = "http://ajax.googleapis.com/ajax/services/search/images?q=#{encodeURIComponent('阿澄佳奈')}&v=1.0&rsz=8"
+    api_key = process.env.GOOGLE_API_KEY
+    custom_search = process.env.GOOGLE_CUSTOM_SEARCH
+    img_api ="https://www.googleapis.com/customsearch/v1?key=#{api_key}&cx=#{custom_search}&searchType=image&q=#{encodeURIComponent('阿澄佳奈')}&num=10"
     request.get img_api, (err, res, body) ->
-      random = Math.floor(Math.random() * 8)
-      img_url = JSON.parse(body).responseData.results[random].unescapedUrl
+      random = Math.floor(Math.random() * 10)
+      img_url = JSON.parse(body).items[random].link
       msg.send img_url
 
   robot.respond /youtube/i, (msg) ->
