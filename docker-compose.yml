@@ -1,0 +1,12 @@
+version: '2'
+services:
+  redis:
+    image: redis:3.2-alpine
+  node:
+    build: dockerfiles/development
+    env_file: .docker-env
+    volumes:
+      - .:/var/opt/app
+    links:
+      - redis:redis
+    command: bin/hubot -a slack
