@@ -1,0 +1,19 @@
+machine:
+  services:
+    - docker
+  node:
+    version: 5.7.0
+dependencies:
+  override:
+    - docker build -f dockerfiles/production/Dockerfile -t h3poteto/asumiss .
+    - npm install
+test:
+  override:
+    - echo "pending"
+
+deployment:
+  hub:
+    branch: docker
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push h3poteto/asumiss
