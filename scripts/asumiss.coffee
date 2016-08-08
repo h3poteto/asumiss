@@ -9,6 +9,8 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 request = require('request')
 npid = require('npid')
+cronJob  = require('cron').CronJob
+
 filepath = 'tmp/pids/asumiss.pid'
 npid.remove(filepath)
 pid = npid.create(filepath)
@@ -47,6 +49,18 @@ module.exports = (robot) ->
     request.get asumibot_api, (err, res, body) ->
       movie_url = JSON.parse(body).url
       msg.send movie_url
+
+  new cronJob('30 0 * * *', () ->
+    @exec = require('child_process').exec
+    command = "./external_bin/ec2-reserved-checker -info=false"
+
+    @exec command, (err, stdout, stderr) ->
+      res = ""
+      res += err if err?
+      res += stderr if stderr?
+      res += stdout if stdout?
+      robot.send {room: "#aws"}, res
+  ).start()
 
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
