@@ -50,7 +50,7 @@ module.exports = (robot) ->
       movie_url = JSON.parse(body).url
       msg.send movie_url
 
-  new cronJob('30 0 * * *', () ->
+  new cronJob('30 0 * * 6', () ->
     @exec = require('child_process').exec
     command = "./external_bin/ec2-reserved-checker -info=false"
 
